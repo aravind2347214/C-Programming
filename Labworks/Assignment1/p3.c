@@ -8,56 +8,82 @@
 struct student {
 	int rollno;
 	char name[10];
-	float mark[5];
+	float smarks[5];
+	float perc;
+	float totalMark;
+	char markless;
+	char status[20];
 }s1,s2,s3;
 
 struct student getData(){
 	struct student s;
+	int i,j;
 	printf("Enter Name , RollNumber and Marks(Out of 100) in 5 Subjects in Order\n");
     gets(s.name);
 	scanf("%d",&s.rollno);
-	scanf("%f%f%f%f%f",&s.mark[0],&s.mark[1],&s.mark[2],&s.mark[3],&s.mark[4]);
+	s.totalMark=0;
+	s.markless='T';
+	
+	for(i=0;i<6;i++)
+	{
+		printf("Enter Marks in 5 subjects for Semester %d\n",i+1);
+		for(j=0;j<5;j++){
+			scanf("%f",&s.smarks[j]);
+			if(s.smarks[j]>40.0){
+				s.markless='F';	
+			}
+			s.totalMark+=s.smarks[j];
+		}		
+	}
+	s.perc=(s.totalMark/3000)*100;
+	
+	
+	if(s.perc>90 && s.perc<=100)
+	{
+		strcpy(s.status,"Outstanding");
+	}
+	else if(s.perc>80 && s.perc<=90)
+	{
+		strcpy(s.status,"First Class with Distinction");
+	}
+	else if(s.perc>60 && s.perc<=80)
+	{
+		strcpy(s.status,"First Class");	
+	}
+	else if(s.perc>40 && s.perc<=60)
+	{
+		strcpy(s.status,"Pass");	
+	}
+	else if(s.perc<=40 || s.markless=='T')
+	{
+		strcpy(s.status,"Fail" );	
+	}
 	return s;
 	}
 	
+	
+	
 void showData(struct student s){
-	printf("Roll No   : %d\n",s.rollno);
-	printf("Name      : %s\n",s.name);
-	printf("Subject 1 : %f\n",s.mark[0]);
-	printf("Subject 2 : %f\n",s.mark[1]);
-	printf("Subject 3 : %f\n",s.mark[2]);
-	printf("Subject 4 : %f\n",s.mark[3]);
-	printf("Subject 5 : %f\n",s.mark[4]);
+	printf("\n-----------Consolidated MarkList----------\n");
+	printf("\tRoll No     : %d\n",s.rollno);
+	printf("\tName        : %s\n",s.name);
+	printf("\tPercentage  : %0.2f\n",s.perc);
+	printf("\tTotal Marks : %0.2f\n",s.totalMark);
+	printf("\tResult      : %s\n",s.status);
+	printf("--------------------------------------------\n");
 }	
-	
-void calcPercentage(struct student s){
-	float perc;
-	bool markless;
-	perc=(s.mark[0]+s.mark[1]+s.mark[2]+s.mark[3]+s.mark[4])/100;
-	if(s.mark[0]<=40 && s.mark[1]<=40 &&s.mark[2]<=40 &&s.mark[3]<=40 &&s.mark[4]<=40)
-	  markless = true;
-	if(markless&& perc<=40)
-		printf("Fail w") 
-	
-	
-	
-	
-	
-		
-	}
+
 
 void main(){
 	printf("Enter Data for Student 1 :\n");
 	s1 = getData();
-//	printf("Enter Data for Student 2 :\n");
-//	s2 = getData();
-//	printf("Enter Data for Student 3 :\n");
-//	s3 = getData();
-	
 	showData(s1);
-//	showData(s2);
-//	showData(s3);
-	
+	printf("Enter Data for Student 2 :\n");
+	s2=getData();
+	showData(s2);
+    printf("Enter Data for Student 3 :\n");   
+	s3=getData();
+	showData(s2);
  getch();	
 }
 
