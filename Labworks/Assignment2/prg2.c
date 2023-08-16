@@ -1,9 +1,6 @@
 #include<stdio.h>
 #include<conio.h>
 #include<string.h>
-
-//program to display till nand their sum
-
 void main(){
 	int n,i,sum=0;
 	printf("Test Data : ");
