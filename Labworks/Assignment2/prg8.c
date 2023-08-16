@@ -2,7 +2,6 @@
 #include<conio.h>
 #include<string.h>
 #include<math.h>
-
 void main(){
 	int temp;
 	printf("Enter Temperature in centigrade : ");

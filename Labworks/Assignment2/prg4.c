@@ -1,9 +1,6 @@
 #include<stdio.h>
 #include<conio.h>
 #include<string.h>
-
-//program to display till nand their sum
-
 void main(){
 	int i,limit;
 	float sum;
